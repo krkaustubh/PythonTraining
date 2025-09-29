@@ -1,0 +1,39 @@
+create database student;
+CREATE TABLE student.students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
+);
+CREATE TABLE student.admins (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE student.courses (
+    course_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    faculty_name VARCHAR(100) NOT NULL
+);
+CREATE TABLE student.feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    rating INT NOT NULL,
+    comments TEXT,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+INSERT INTO student.courses (course_name, faculty_name) VALUES ('Mathematics', 'Dr. A'), ('Physics','Dr. B');
+INSERT INTO student.admins (username, password) VALUES ('admin', 'adminpassword');
+INSERT INTO student.students (name, email, password)
+VALUES ('Kaustubh', 'kaustubh@example.com', 'password1234');
+INSERT INTO student.students (name, email, password)
+VALUES ('Suman', 'suman@example.com', 'password12345');
+INSERT INTO student.students (name, email, password)
+VALUES ('Sourayan', 'sourayan@example.com', 'password123567');
+INSERT INTO student.students (name, email, password)
+VALUES ('Nagesh', 'nagesh@example.com', 'password12345678');
+select * from student.feedback;
+
